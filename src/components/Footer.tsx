@@ -16,7 +16,7 @@ export default function Footer() {
             />
           </div>
           <p className="text-xs text-slate-500 max-w-sm mb-8 leading-relaxed">
-            © {new Date().getFullYear()} Retake Tecnologia & Design. Excelência em Soluções Digitais. Forjando o amanhã através da inovação implacável, precisão técnica e compromisso total com o sucesso do cliente.
+            © 2025 Retake Tecnologia & Design. Excelência em Soluções Digitais. Forjando o amanhã através da inovação implacável, precisão técnica e compromisso total com o sucesso do cliente.
           </p>
           <div className="flex gap-4">
             <a 
