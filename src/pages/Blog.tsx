@@ -41,7 +41,7 @@ export default function Blog() {
   const blogSchema = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "name": "Blog Retake Tecnologia",
+    "name": "Blog Retake Tecnologia & Design",
     "description": "Insights sobre o futuro do desenvolvimento digital, automação e design de alta performance.",
     "publisher": {
       "@type": "Organization",

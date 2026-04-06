@@ -27,12 +27,18 @@ export default function Contact() {
     try {
       const formDataToSend = new FormData();
       formDataToSend.append('access_key', '43375ebb-1b60-4125-bbca-3648105332ed');
-      formDataToSend.append('name', formData.name);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('project_type', formData.project_type);
-      formDataToSend.append('message', formData.message);
-      formDataToSend.append('subject', `Novo Contato: ${formData.name} - ${formData.project_type}`);
-      formDataToSend.append('from_name', 'Retake Tecnologia Site');
+      
+      // Nomes de campos amigáveis para o e-mail (Web3Forms usa a chave como label)
+      formDataToSend.append('Nome Completo', formData.name);
+      formDataToSend.append('E-mail Corporativo', formData.email);
+      formDataToSend.append('Serviço de Interesse', formData.project_type);
+      formDataToSend.append('Mensagem do Cliente', formData.message);
+      
+      // Configurações de Identidade do E-mail
+      formDataToSend.append('title', 'Novo Lead do Site - Retake Tecnologia & Design');
+      formDataToSend.append('subject', `🚀 Novo Contato: ${formData.name} (${formData.project_type})`);
+      formDataToSend.append('from_name', 'Retake Tecnologia & Design');
+      formDataToSend.append('replyto', formData.email); // Facilita a resposta direta ao cliente
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -57,7 +63,7 @@ export default function Contact() {
   const contactSchema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    "name": "Contato - Retake Tecnologia",
+    "name": "Contato - Retake Tecnologia & Design",
     "description": "Entre em contato conosco para iniciar seu projeto de Power Platform ou WordPress.",
     "mainEntity": {
       "@type": "Organization",
@@ -76,7 +82,7 @@ export default function Contact() {
     >
       <SEO 
         title="Contato"
-        description="Pronto para o próximo nível? Entre em contato com a Retake Tecnologia e descubra como podemos acelerar seu negócio com tecnologia de ponta."
+        description="Pronto para o próximo nível? Entre em contato com a Retake Tecnologia & Design e descubra como podemos acelerar seu negócio com tecnologia de ponta."
         canonical="/contato"
         schema={contactSchema}
       />

@@ -10,13 +10,13 @@ export default function Footer() {
           <div className="flex items-center gap-2 mb-6">
             <img 
               src={logo} 
-              alt="Retake Tecnologia" 
+              alt="Retake Tecnologia & Design" 
               className="h-14 w-auto object-contain brightness-0 invert opacity-90"
               referrerPolicy="no-referrer"
             />
           </div>
           <p className="text-xs text-slate-500 max-w-sm mb-8 leading-relaxed">
-            © 2024 Retake Tecnologia. Excelência em Soluções Digitais. Forjando o amanhã através da inovação implacável, precisão técnica e compromisso total com o sucesso do cliente.
+            © {new Date().getFullYear()} Retake Tecnologia & Design. Excelência em Soluções Digitais. Forjando o amanhã através da inovação implacável, precisão técnica e compromisso total com o sucesso do cliente.
           </p>
           <div className="flex gap-4">
             <a 

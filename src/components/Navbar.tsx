@@ -36,7 +36,7 @@ export default function Navbar() {
         <Link to="/" className="flex items-center gap-2 group">
           <img 
             src={logo} 
-            alt="Retake Tecnologia" 
+            alt="Retake Tecnologia & Design" 
             className="h-16 w-auto object-contain"
             referrerPolicy="no-referrer"
           />

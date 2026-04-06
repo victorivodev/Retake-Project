@@ -67,7 +67,7 @@ export default function Home() {
     >
       <SEO 
         title="Especialistas em Power Platform & WordPress"
-        description="A Retake Tecnologia entrega vantagem competitiva através de automação Microsoft Power Platform e ecossistemas web WordPress ultra-rápidos."
+        description="A Retake Tecnologia & Design entrega vantagem competitiva através de automação Microsoft Power Platform e ecossistemas web WordPress ultra-rápidos."
         schema={organizationSchema}
       />
       {/* Hero Section */}
@@ -93,7 +93,7 @@ export default function Home() {
               Líderes em Inovação
             </span>
             <h1 className="text-display-lg text-on-surface mb-8">
-              Retake Tecnologia: <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary">Especialistas</span> em Power Platform e WordPress de <span className="brand-signature">Alta Performance</span>.
+              Retake Tecnologia & Design: <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary">Especialistas</span> em Power Platform e WordPress de <span className="brand-signature">Alta Performance</span>.
             </h1>
             <p className="text-lg text-on-surface-variant max-w-2xl leading-relaxed mb-10 mx-auto lg:mx-0">
               Não apenas desenvolvemos software. Entregamos vantagem competitiva através de automação Microsoft e ecossistemas web ultra-rápidos que convertem.
@@ -444,7 +444,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-8 relative z-10 text-center">
           <h2 className="text-display-md mb-8">Pronto para a sua <span className="text-primary">Evolução Digital?</span></h2>
           <p className="text-xl text-on-surface-variant mb-12">
-            Vamos transformar sua visão técnica em realidade de mercado com o selo de excelência da Retake Tecnologia.
+            Vamos transformar sua visão técnica em realidade de mercado com o selo de excelência da Retake Tecnologia & Design.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>

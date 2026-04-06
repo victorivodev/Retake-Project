@@ -13,7 +13,7 @@ export default function PrivacyPolicy() {
     >
       <SEO 
         title="Política de Privacidade"
-        description="Saiba como a Retake Tecnologia protege seus dados e respeita sua privacidade."
+        description="Saiba como a Retake Tecnologia & Design protege seus dados e respeita sua privacidade."
         canonical="/politica-de-privacidade"
       />
       
@@ -30,7 +30,7 @@ export default function PrivacyPolicy() {
           <section className="space-y-4">
             <h2 className="text-2xl font-bold text-white">1. Introdução</h2>
             <p>
-              A Retake Tecnologia ("nós", "nosso") valoriza a sua privacidade. Esta Política de Privacidade descreve como coletamos, usamos e protegemos suas informações quando você visita nosso site ou utiliza nossos serviços de Power Platform e WordPress.
+              A Retake Tecnologia & Design ("nós", "nosso") valoriza a sua privacidade. Esta Política de Privacidade descreve como coletamos, usamos e protegemos suas informações quando você visita nosso site ou utiliza nossos serviços de Power Platform e WordPress.
             </p>
           </section>
 
