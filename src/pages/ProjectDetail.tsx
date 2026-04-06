@@ -59,7 +59,7 @@ export default function ProjectDetail() {
     "image": project.img,
     "author": {
       "@type": "Organization",
-      "name": "Retake Tecnologia & Design"
+      "name": "Retake | Tecnologia & Design"
     }
   } : undefined;
 

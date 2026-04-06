@@ -45,7 +45,7 @@ export default function Blog() {
     "description": "Insights sobre o futuro do desenvolvimento digital, automação e design de alta performance.",
     "publisher": {
       "@type": "Organization",
-      "name": "Retake Tecnologia & Design"
+      "name": "Retake | Tecnologia & Design"
     }
   };
 

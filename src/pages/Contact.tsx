@@ -61,7 +61,7 @@ export default function Contact() {
     "description": "Entre em contato conosco para iniciar seu projeto de Power Platform ou WordPress.",
     "mainEntity": {
       "@type": "Organization",
-      "name": "Retake Tecnologia & Design",
+      "name": "Retake | Tecnologia & Design",
       "telephone": "+55-11-93057-9963",
       "email": "contato@retaketecnologia.com.br"
     }
