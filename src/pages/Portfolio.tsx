@@ -1,46 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { LayoutGrid, Globe, Settings2, ShoppingBag, ArrowRight } from 'lucide-react';
+import { LayoutGrid, Globe, Settings2, ShoppingBag } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
-const projects = [
-  {
-    id: 1,
-    category: 'Power Platform',
-    title: 'Hub de Gestão Logística 4.0',
-    desc: 'Sistema completo de monitoramento de frota e inventário em tempo real para operações nacionais de grande escala.',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD5HMCDY1GQpq_1zTCjpL8KuYhu6F4OrmtXeWUavOA3fyk7q1rs-uCp0yF79mJbRctaJyOXyZ6TruGWwB8pYYSLvMcpyjYv3A6-n8Ro06Il4c-jWCqNwcDWn_gVtqZ_uhf-wlDweIhjfUW-CqcnevvYN4o0vlAonCuemttrGB6wuzv5AvaCD1YakX0ZMEaJeMAWrxSb1iemfw_oUFOMU9G6sFAqVKOe27Aw5O-eQZ7oO9Xptx-iKNNxhNBPqXY80Acu-ndPt7DYONQ',
-    icon: <LayoutGrid className="w-12 h-12" />
-  },
-  {
-    id: 2,
-    category: 'WordPress',
-    title: 'Portal Institucional Venture Capital',
-    desc: 'Presença digital de alta performance com foco em autoridade de marca e conversão de investidores institucionais.',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC4JSKuOxg7KMMgWFfsURZFQ6x9eumpzpfBcSAles8N5nPtKbJ7_jrpyqbqA8lYua62wML2cFWqjfUX-EhfxysR0JrdDabRpRm2a-kisld8QcNXqwL9bTTWc5JDfrn0g35Tl84xYsue-C2sqF3UjM7P_otGNymCMEKLS1btw5xNRHsuDwV8VNYuj2CElrvRtiDVHeFQDLAcyOGJH_2ZLtsbNQFId2vAUBtBhwDh3onWUuWshUmcsDhFKyVr2mpbVaAeuKwr9PUaI4A',
-    icon: <Globe className="w-12 h-12" />
-  },
-  {
-    id: 3,
-    category: 'Power Platform',
-    title: 'Workflow de Compras RPA',
-    desc: 'Automação inteligente de fluxos de aprovação integrados ao ERP SAP, eliminando erros manuais em 98%.',
-    img: null,
-    icon: <Settings2 className="w-12 h-12" />
-  },
-  {
-    id: 4,
-    category: 'WordPress',
-    title: 'Ecommerce de Luxo',
-    desc: 'Experiência de compra otimizada com checkout simplificado e design responsivo focado em dispositivos móveis.',
-    img: null,
-    icon: <ShoppingBag className="w-12 h-12" />
-  }
-];
+interface Project {
+  id: number;
+  category: string;
+  title: string;
+  desc: string;
+  img: string | null;
+  icon: string;
+}
+
+const iconMap: Record<string, React.ReactNode> = {
+  LayoutGrid: <LayoutGrid className="w-12 h-12" />,
+  Globe: <Globe className="w-12 h-12" />,
+  Settings2: <Settings2 className="w-12 h-12" />,
+  ShoppingBag: <ShoppingBag className="w-12 h-12" />
+};
 
 export default function Portfolio() {
+  const [projects, setProjects] = useState<Project[]>([]);
   const [filter, setFilter] = useState('Todos');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        const response = await fetch('data/projects.json');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        setProjects(data);
+      } catch (err) {
+        console.error('Erro ao carregar portfólio:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProjects();
+  }, []);
+
+  if (loading) {
+    return <div className="pt-40 pb-20 text-center text-on-surface-variant">Carregando portfólio...</div>;
+  }
 
   const filteredProjects = filter === 'Todos' 
     ? projects 
@@ -75,6 +78,7 @@ export default function Portfolio() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary rounded-full blur-[120px]"></div>
         </div>
         <div className="max-w-4xl z-10">
+          <span className="inline-block px-4 py-1 mb-6 border border-primary/20 bg-primary/5 rounded-full text-xs font-bold uppercase tracking-widest text-primary">Portfólio</span>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-on-surface mb-6">
             Nosso <span className="text-primary">Portfólio</span>
           </h1>
@@ -110,45 +114,51 @@ export default function Portfolio() {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                whileHover={{ y: -10 }}
-                transition={{ duration: 0.4 }}
-              >
-                <Link to={`/portfolio/${project.id}`} className="group block">
-                  <div className="aspect-video overflow-hidden rounded-xl bg-surface-container-low mb-6 border border-white/5 flex items-center justify-center relative">
-                    {project.img ? (
-                      <img 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" 
-                        src={project.img} 
-                        alt={project.title}
-                        referrerPolicy="no-referrer"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-surface-container flex items-center justify-center rounded-lg text-outline">
-                        {project.icon}
+            {filteredProjects.length > 0 ? (
+              filteredProjects.map((project) => (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  whileHover={{ y: -10 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <Link to={`/portfolio/${project.id}`} className="group block">
+                    <div className="aspect-video overflow-hidden rounded-xl bg-surface-container-low mb-6 border border-white/5 flex items-center justify-center relative">
+                      {project.img ? (
+                        <img 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" 
+                          src={project.img} 
+                          alt={project.title}
+                          referrerPolicy="no-referrer"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-surface-container flex items-center justify-center rounded-lg text-outline">
+                          {iconMap[project.icon] || <LayoutGrid className="w-12 h-12" />}
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-500 flex items-center justify-center">
+                        <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-primary text-background px-4 py-2 rounded font-bold text-xs uppercase tracking-widest">Ver Estudo de Caso</span>
                       </div>
-                    )}
-                    <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-500 flex items-center justify-center">
-                      <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-primary text-background px-4 py-2 rounded font-bold text-xs uppercase tracking-widest">Ver Estudo de Caso</span>
                     </div>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <span className={`text-[10px] font-black uppercase tracking-widest ${project.category === 'Power Apps' || project.category === 'Power Platform' ? 'text-primary' : 'text-tertiary'}`}>
-                      {project.category}
-                    </span>
-                    <h3 className="text-2xl font-bold text-on-surface group-hover:text-primary transition-colors">{project.title}</h3>
-                    <p className="text-on-surface-variant text-sm leading-relaxed max-w-lg">{project.desc}</p>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+                    <div className="flex flex-col gap-2">
+                      <span className={`text-[10px] font-black uppercase tracking-widest ${project.category === 'Power Apps' || project.category === 'Power Platform' ? 'text-primary' : 'text-tertiary'}`}>
+                        {project.category}
+                      </span>
+                      <h3 className="text-2xl font-bold text-on-surface group-hover:text-primary transition-colors">{project.title}</h3>
+                      <p className="text-on-surface-variant text-sm leading-relaxed max-w-lg">{project.desc}</p>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-20 text-on-surface-variant">
+                Nenhum projeto encontrado nesta categoria.
+              </div>
+            )}
           </AnimatePresence>
         </div>
       </section>

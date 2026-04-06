@@ -1,8 +1,59 @@
-import { motion } from 'motion/react';
-import { Verified, Send } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Verified, Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { useState } from 'react';
 import SEO from '../components/SEO';
 
 export default function Contact() {
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    project_type: 'Microsoft Power Apps',
+    message: ''
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validação robusta de e-mail
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(formData.email)) {
+      setStatus('error');
+      return;
+    }
+
+    setStatus('loading');
+
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('access_key', '43375ebb-1b60-4125-bbca-3648105332ed');
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('project_type', formData.project_type);
+      formDataToSend.append('message', formData.message);
+      formDataToSend.append('subject', `Novo Contato: ${formData.name} - ${formData.project_type}`);
+      formDataToSend.append('from_name', 'Retake Tecnologia Site');
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataToSend
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', project_type: 'Microsoft Power Apps', message: '' });
+      } else {
+        console.error('Erro retornado pela API:', result);
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+      setStatus('error');
+    }
+  };
+
   const contactSchema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
@@ -11,8 +62,8 @@ export default function Contact() {
     "mainEntity": {
       "@type": "Organization",
       "name": "Retake Tecnologia & Design",
-      "telephone": "+55-11-99999-9999",
-      "email": "contato@retake.com.br"
+      "telephone": "+55-11-93057-9963",
+      "email": "contato@retaketecnologia.com.br"
     }
   };
 
@@ -53,9 +104,8 @@ export default function Contact() {
           <div className="lg:col-span-4 space-y-12">
             <div className="space-y-8">
               {[
-                { label: 'E-mail Corporativo', value: 'contato@retake.com.br' },
-                { label: 'WhatsApp Business', value: '+55 (11) 98765-4321' },
-                { label: 'Sede Administrativa', value: 'Av. Paulista, 2000 - 12º Andar\nBela Vista, São Paulo - SP', isAddress: true }
+                { label: 'E-mail Corporativo', value: 'contato@retaketecnologia.com.br' },
+                { label: 'WhatsApp Business', value: '+55 (11) 93057-9963' }
               ].map((item, index) => (
                 <motion.div 
                   key={item.label}
@@ -66,14 +116,7 @@ export default function Contact() {
                   className="group"
                 >
                   <h3 className="text-tertiary font-bold uppercase tracking-widest text-xs mb-4">{item.label}</h3>
-                  {item.isAddress ? (
-                    <p className="text-lg text-on-surface-variant leading-relaxed">
-                      Av. Paulista, 2000 - 12º Andar<br/>
-                      Bela Vista, São Paulo - SP
-                    </p>
-                  ) : (
-                    <p className="text-2xl font-bold text-white group-hover:text-primary transition-colors">{item.value}</p>
-                  )}
+                  <p className="text-2xl font-bold text-white group-hover:text-primary transition-colors">{item.value}</p>
                 </motion.div>
               ))}
             </div>
@@ -87,10 +130,10 @@ export default function Contact() {
             >
               <div className="flex items-center gap-4 mb-4 text-primary">
                 <Verified className="w-6 h-6 fill-primary/20" />
-                <span className="text-sm font-bold uppercase tracking-tighter">Parceiro Certificado</span>
+                <span className="text-sm font-bold uppercase tracking-tighter">Experiência de Mercado</span>
               </div>
               <p className="text-sm text-on-surface-variant italic">
-                "Especialistas em arquitetura de dados e design de interface focado em conversão."
+                "Nossa equipe é composta por especialistas com passagens por grandes instituições como Banco Sofisa, Cognizant, MSD e Funcional Health Tech trazendo bagagem técnica de elite para o seu projeto."
               </p>
             </motion.div>
           </div>
@@ -104,65 +147,129 @@ export default function Contact() {
             className="lg:col-span-8"
           >
             <div className="glass-panel p-10 md:p-16 rounded-2xl border border-white/5 kinetic-shadow">
-              <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-2">
-                    <label className="block text-xs font-bold uppercase tracking-widest text-outline">Nome Completo</label>
-                    <input 
-                      className="w-full bg-surface-container-lowest border-none focus:ring-2 focus:ring-primary/50 p-4 rounded text-on-surface placeholder:text-outline/50 transition-all" 
-                      placeholder="Ex: João Silva" 
-                      type="text"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-xs font-bold uppercase tracking-widest text-outline">E-mail Corporativo</label>
-                    <input 
-                      className="w-full bg-surface-container-lowest border-none focus:ring-2 focus:ring-primary/50 p-4 rounded text-on-surface placeholder:text-outline/50 transition-all" 
-                      placeholder="joao@empresa.com.br" 
-                      type="email"
-                    />
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="block text-xs font-bold uppercase tracking-widest text-outline">Tipo de Projeto</label>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <motion.label 
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="relative flex items-center p-4 bg-surface-container-lowest rounded cursor-pointer group hover:bg-surface-container-high transition-colors"
+              <AnimatePresence mode="wait">
+                {status === 'success' ? (
+                  <motion.div 
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center py-12 space-y-6"
+                  >
+                    <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
+                      <CheckCircle2 className="w-10 h-10 text-primary" />
+                    </div>
+                    <h3 className="text-3xl font-black text-white">Proposta Enviada!</h3>
+                    <p className="text-on-surface-variant max-w-md mx-auto">
+                      Recebemos sua mensagem. Nossa equipe de especialistas analisará seu desafio e entrará em contato em até 24 horas úteis.
+                    </p>
+                    <button 
+                      onClick={() => setStatus('idle')}
+                      className="text-primary font-bold hover:underline"
                     >
-                      <input className="w-4 h-4 text-primary bg-surface border-outline-variant focus:ring-primary" name="project_type" type="radio"/>
-                      <span className="ml-3 font-bold text-sm text-on-surface-variant group-hover:text-white">Microsoft Power Apps</span>
-                    </motion.label>
-                    <motion.label 
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="relative flex items-center p-4 bg-surface-container-lowest rounded cursor-pointer group hover:bg-surface-container-high transition-colors"
+                      Enviar outra mensagem
+                    </button>
+                  </motion.div>
+                ) : (
+                  <form className="space-y-8" onSubmit={handleSubmit}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div className="space-y-2">
+                        <label className="block text-xs font-bold uppercase tracking-widest text-outline">Nome Completo</label>
+                        <input 
+                          required
+                          value={formData.name}
+                          onChange={(e) => setFormData({...formData, name: e.target.value})}
+                          className="w-full bg-surface-container-lowest border-none focus:ring-2 focus:ring-primary/50 p-4 rounded text-on-surface placeholder:text-outline/50 transition-all" 
+                          placeholder="Ex: João Silva" 
+                          type="text"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="block text-xs font-bold uppercase tracking-widest text-outline">E-mail Corporativo</label>
+                        <input 
+                          required
+                          value={formData.email}
+                          onChange={(e) => setFormData({...formData, email: e.target.value})}
+                          className="w-full bg-surface-container-lowest border-none focus:ring-2 focus:ring-primary/50 p-4 rounded text-on-surface placeholder:text-outline/50 transition-all" 
+                          placeholder="joao@empresa.com.br" 
+                          type="email"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label className="block text-xs font-bold uppercase tracking-widest text-outline">Tipo de Projeto</label>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <motion.label 
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className={`relative flex items-center p-4 rounded cursor-pointer group transition-colors ${formData.project_type === 'Microsoft Power Apps' ? 'bg-primary/10 border border-primary/30' : 'bg-surface-container-lowest hover:bg-surface-container-high'}`}
+                        >
+                          <input 
+                            className="w-4 h-4 text-primary bg-surface border-outline-variant focus:ring-primary" 
+                            name="project_type" 
+                            type="radio"
+                            checked={formData.project_type === 'Microsoft Power Apps'}
+                            onChange={() => setFormData({...formData, project_type: 'Microsoft Power Apps'})}
+                          />
+                          <span className={`ml-3 font-bold text-sm transition-colors ${formData.project_type === 'Microsoft Power Apps' ? 'text-primary' : 'text-on-surface-variant group-hover:text-white'}`}>Microsoft Power Apps</span>
+                        </motion.label>
+                        <motion.label 
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className={`relative flex items-center p-4 rounded cursor-pointer group transition-colors ${formData.project_type === 'Websites WordPress' ? 'bg-primary/10 border border-primary/30' : 'bg-surface-container-lowest hover:bg-surface-container-high'}`}
+                        >
+                          <input 
+                            className="w-4 h-4 text-primary bg-surface border-outline-variant focus:ring-primary" 
+                            name="project_type" 
+                            type="radio"
+                            checked={formData.project_type === 'Websites WordPress'}
+                            onChange={() => setFormData({...formData, project_type: 'Websites WordPress'})}
+                          />
+                          <span className={`ml-3 font-bold text-sm transition-colors ${formData.project_type === 'Websites WordPress' ? 'text-primary' : 'text-on-surface-variant group-hover:text-white'}`}>Websites WordPress</span>
+                        </motion.label>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="block text-xs font-bold uppercase tracking-widest text-outline">Mensagem</label>
+                      <textarea 
+                        required
+                        value={formData.message}
+                        onChange={(e) => setFormData({...formData, message: e.target.value})}
+                        className="w-full bg-surface-container-lowest border-none focus:ring-2 focus:ring-primary/50 p-4 rounded text-on-surface placeholder:text-outline/50 transition-all resize-none" 
+                        placeholder="Descreva brevemente seu desafio tecnológico..." 
+                        rows={5}
+                      ></textarea>
+                    </div>
+
+                    {status === 'error' && (
+                      <motion.div 
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex items-center gap-2 text-red-400 text-sm font-bold"
+                      >
+                        <AlertCircle className="w-4 h-4" />
+                        {!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email) 
+                          ? 'Por favor, insira um e-mail corporativo válido.' 
+                          : 'Ocorreu um erro ao enviar. Por favor, tente novamente ou use nosso WhatsApp.'}
+                      </motion.div>
+                    )}
+
+                    <motion.button 
+                      disabled={status === 'loading'}
+                      whileHover={status === 'loading' ? {} : { scale: 1.02, boxShadow: "0 0 30px -5px rgba(14,165,233,0.4)" }}
+                      whileTap={status === 'loading' ? {} : { scale: 0.95 }}
+                      className={`w-full md:w-auto bg-primary text-background px-12 py-5 rounded font-black uppercase tracking-widest text-sm transition-all duration-300 flex items-center justify-center gap-2 ${status === 'loading' ? 'opacity-70 cursor-not-allowed' : ''}`}
                     >
-                      <input className="w-4 h-4 text-primary bg-surface border-outline-variant focus:ring-primary" name="project_type" type="radio"/>
-                      <span className="ml-3 font-bold text-sm text-on-surface-variant group-hover:text-white">Websites WordPress</span>
-                    </motion.label>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="block text-xs font-bold uppercase tracking-widest text-outline">Mensagem</label>
-                  <textarea 
-                    className="w-full bg-surface-container-lowest border-none focus:ring-2 focus:ring-primary/50 p-4 rounded text-on-surface placeholder:text-outline/50 transition-all resize-none" 
-                    placeholder="Descreva brevemente seu desafio tecnológico..." 
-                    rows={5}
-                  ></textarea>
-                </div>
-
-                <motion.button 
-                  whileHover={{ scale: 1.02, boxShadow: "0 0 30px -5px rgba(14,165,233,0.4)" }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full md:w-auto bg-primary text-background px-12 py-5 rounded font-black uppercase tracking-widest text-sm transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  Enviar Proposta <Send className="w-4 h-4" />
-                </motion.button>
-              </form>
+                      {status === 'loading' ? (
+                        <>Processando... <Loader2 className="w-4 h-4 animate-spin" /></>
+                      ) : (
+                        <>Enviar Proposta <Send className="w-4 h-4" /></>
+                      )}
+                    </motion.button>
+                  </form>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         </div>

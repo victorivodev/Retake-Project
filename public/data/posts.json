@@ -1,0 +1,68 @@
+[
+  {
+    "id": 3,
+    "title": "Microsoft lança Wave 1 2026 da Power Platform com foco em IA e automação avançada",
+    "excerpt": "A nova atualização da Power Platform traz Copilot mais inteligente, apps offline aprimorados e automações autônomas.",
+    "date": "01 Apr 2026",
+    "author": "Victor Ivo",
+    "readTime": "6 min",
+    "category": "Power Platform",
+    "img": "https://www.thatsagoodquestion.info/content/images/size/w1200/2026/03/unnamed.jpg",
+    "content": "## Power Platform mais inteligente do que nunca\n\nA Microsoft iniciou a liberação da Wave 1 2026 da Power Platform, com dezenas de novidades focadas em inteligência artificial e produtividade.\n\n### Destaques:\n\n* Copilot mais avançado na criação de apps e fluxos\n* Automação com agentes de IA capazes de executar tarefas complexas\n* Melhor suporte offline para Power Apps\n\nA tendência é clara: menos código e mais inteligência nos processos.\n\n#### Conclusão\n\nEmpresas que adotarem IA dentro da automação sairão na frente nos próximos anos."
+  },
+  {
+    "id": 4,
+    "title": "WordPress 7.0 chega com IA nativa e colaboração em tempo real",
+    "excerpt": "A maior atualização da história do WordPress traz inteligência artificial integrada e edição colaborativa estilo Google Docs.",
+    "date": "09 Apr 2026",
+    "author": "Victor Ivo",
+    "readTime": "7 min",
+    "category": "WordPress",
+    "img": "https://webdevstudios.com/wp-content/uploads/2026/03/WordPress-and-AI-How-Native-AI-is-Changing-Enterprise-WordPress-1024x576.png",
+    "content": "## WordPress entra de vez na era da IA\n\nO WordPress 7.0 marca uma mudança gigante na plataforma, com uma camada de inteligência artificial integrada diretamente no core.\n\n### Novidades principais:\n\n* IA nativa para geração de conteúdo e automações\n* Edição colaborativa em tempo real\n* Novo painel administrativo mais moderno\n\nAlém disso, plugins agora podem se conectar a múltiplos modelos de IA de forma padronizada.\n\n#### Conclusão\n\nWordPress deixa de ser apenas CMS e vira uma plataforma inteligente de desenvolvimento."
+  },
+  {
+    "id": 5,
+    "title": "Headless WordPress e IA dominam as tendências de desenvolvimento em 2026",
+    "excerpt": "Arquitetura headless e automação com IA são os pilares do novo desenvolvimento web moderno.",
+    "date": "02 Apr 2026",
+    "author": "Victor Ivo",
+    "readTime": "6 min",
+    "category": "Desenvolvimento",
+    "img": "https://www.datocms-assets.com/48401/1627663879-wordpress-as-headless-cms.png?fit=max&w=900",
+    "content": "## O novo padrão de desenvolvimento web\n\nO desenvolvimento com WordPress está mudando rapidamente com a adoção de arquiteturas headless e automação.\n\n### Tendências fortes:\n\n* WordPress como backend + React/Vue no frontend\n* Deploy automatizado com CI/CD\n* Uso de IA para testes e otimização\n\nEssas práticas aumentam performance, escalabilidade e segurança.\n\n#### Conclusão\n\nEmpresas que não adotarem esse modelo vão ficar para trás."
+  },
+  {
+    "id": 6,
+    "title": "Automação inteligente evolui para hyperautomation nas empresas",
+    "excerpt": "Empresas estão deixando de automatizar tarefas isoladas para automatizar processos inteiros com IA.",
+    "date": "05 Apr 2026",
+    "author": "Victor Ivo",
+    "readTime": "5 min",
+    "category": "Tecnologia",
+    "img": "https://images.ctfassets.net/lzny33ho1g45/5UdXWfheaMHFeGVzWfOWMM/e04c588e3ebcad576047d217f1e7e57e/hyperautomation-process.png",
+    "content": "## Da automação simples para hyperautomation\n\nA evolução da automação chegou a um novo nível: hyperautomation.\n\n### O que mudou:\n\n* IA executando processos completos sem intervenção humana\n* Integração entre múltiplos sistemas automaticamente\n* RPA + APIs + IA trabalhando juntos\n\nIsso transforma completamente a operação das empresas.\n\n#### Conclusão\n\nAutomação agora não é mais diferencial, é necessidade."
+  },
+  {
+    "id": 7,
+    "title": "WordPress reforça performance e SEO com foco em Core Web Vitals",
+    "excerpt": "Velocidade e experiência do usuário continuam sendo prioridade máxima para ranqueamento no Google.",
+    "date": "02 Apr 2026",
+    "author": "Victor Ivo",
+    "readTime": "5 min",
+    "category": "SEO & Web",
+    "img": "https://novo-media.ch/app/uploads/2021/03/improve-core-web-vitals-wordpress-1024x536.jpg",
+    "content": "## Performance virou regra\n\nO Google continua priorizando sites rápidos, e o WordPress está evoluindo para acompanhar essa demanda.\n\n### Foco atual:\n\n* Otimização de Core Web Vitals\n* Uso de CDN e cache avançado\n* Temas e plugins mais leves\n\nSites lentos simplesmente não performam mais.\n\n#### Conclusão\n\nSEO hoje começa na performance técnica."
+  },
+  {
+    "id": 8,
+    "title": "WordPress mantém liderança absoluta com mais de 43% da web",
+    "excerpt": "Mesmo com novas plataformas, WordPress continua sendo o CMS mais utilizado do mundo.",
+    "date": "01 Apr 2026",
+    "author": "Victor Ivo",
+    "readTime": "4 min",
+    "category": "Mercado",
+    "img": "https://b8f4g5a7.delivery.rocketcdn.me/wp-content/uploads/2024/03/2-wordpress-cms-market-march-2026.png",
+    "content": "## WordPress continua dominante\n\nMesmo com o avanço de novas tecnologias, o WordPress ainda domina o mercado global.\n\n### Números impressionantes:\n\n* Mais de 43% de todos os sites usam WordPress\n* Mais de 60% de market share entre CMS\n\nIsso mostra a força da plataforma no mercado.\n\n#### Conclusão\n\nWordPress continua sendo a base da web moderna."
+  }
+]

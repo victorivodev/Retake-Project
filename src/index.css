@@ -66,3 +66,35 @@
 .kinetic-shadow {
   box-shadow: 0 40px 100px -20px rgba(14, 165, 233, 0.08);
 }
+
+.markdown-body h2 {
+  @apply text-2xl font-bold mt-12 mb-6 text-white border-b border-white/10 pb-2;
+}
+
+.markdown-body h3 {
+  @apply text-xl font-bold mt-8 mb-4 text-primary;
+}
+
+.markdown-body p {
+  @apply text-on-surface-variant leading-relaxed mb-6 text-lg;
+}
+
+.markdown-body ul {
+  @apply list-disc list-inside mb-6 space-y-2 text-on-surface-variant;
+}
+
+.markdown-body ol {
+  @apply list-decimal list-inside mb-6 space-y-2 text-on-surface-variant;
+}
+
+.markdown-body blockquote {
+  @apply border-l-4 border-primary bg-primary/5 p-6 italic mb-8 rounded-r-lg text-on-surface;
+}
+
+.markdown-body img {
+  @apply rounded-2xl border border-white/10 my-10 shadow-2xl;
+}
+
+.markdown-body strong {
+  @apply text-white font-bold;
+}

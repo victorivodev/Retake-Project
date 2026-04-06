@@ -9,6 +9,8 @@ import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 import ProjectDetail from './pages/ProjectDetail';
 import Blog from './pages/Blog';
+import PostDetail from './pages/PostDetail';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -27,7 +29,9 @@ function AnimatedRoutes() {
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/portfolio/:id" element={<ProjectDetail />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<PostDetail />} />
         <Route path="/contato" element={<Contact />} />
+        <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
       </Routes>
     </AnimatePresence>
   );

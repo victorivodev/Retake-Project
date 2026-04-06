@@ -1,38 +1,54 @@
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowLeft, CheckCircle2, LayoutGrid, Globe, Settings2, ShoppingBag } from 'lucide-react';
 import SEO from '../components/SEO';
 
-const projects = [
-  {
-    id: 1,
-    category: 'Power Platform',
-    title: 'Hub de Gestão Logística 4.0',
-    desc: 'Sistema completo de monitoramento de frota e inventário em tempo real para operações nacionais de grande escala.',
-    fullDesc: 'Este projeto foi desenvolvido para uma das maiores operadoras logísticas do país. O desafio era centralizar dados de múltiplas fontes legadas em uma única interface intuitiva para gestores de pátio e motoristas.',
-    challenge: 'Dados fragmentados em planilhas e sistemas antigos, falta de visibilidade em tempo real e erros manuais constantes na entrada de dados.',
-    solution: 'Implementamos um ecossistema Power Platform completo: Power Apps para a interface móvel, Power Automate para orquestração de dados e Power BI para dashboards analíticos.',
-    results: ['Redução de 35% no tempo de carregamento', 'Eliminação de 98% dos erros de inventário', 'Acesso instantâneo a KPIs críticos via mobile'],
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD5HMCDY1GQpq_1zTCjpL8KuYhu6F4OrmtXeWUavOA3fyk7q1rs-uCp0yF79mJbRctaJyOXyZ6TruGWwB8pYYSLvMcpyjYv3A6-n8Ro06Il4c-jWCqNwcDWn_gVtqZ_uhf-wlDweIhjfUW-CqcnevvYN4o0vlAonCuemttrGB6wuzv5AvaCD1YakX0ZMEaJeMAWrxSb1iemfw_oUFOMU9G6sFAqVKOe27Aw5O-eQZ7oO9Xptx-iKNNxhNBPqXY80Acu-ndPt7DYONQ',
-    icon: <LayoutGrid className="w-12 h-12" />
-  },
-  {
-    id: 2,
-    category: 'WordPress',
-    title: 'Portal Institucional Venture Capital',
-    desc: 'Presença digital de alta performance com foco em autoridade de marca e conversão de investidores institucionais.',
-    fullDesc: 'Um portal desenvolvido para uma firma de Venture Capital sediada em São Paulo. O objetivo era transmitir sofisticação, segurança e agilidade, atraindo tanto startups promissoras quanto investidores de alto calibre.',
-    challenge: 'Site antigo lento, não responsivo e com design datado que não refletia a modernidade do fundo.',
-    solution: 'Desenvolvimento de um tema WordPress exclusivo (headless approach para máxima performance), focado em Core Web Vitals e design minimalista de elite.',
-    results: ['Carregamento em menos de 800ms', 'Aumento de 150% no tempo de permanência no site', 'Design premiado por excelência visual'],
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC4JSKuOxg7KMMgWFfsURZFQ6x9eumpzpfBcSAles8N5nPtKbJ7_jrpyqbqA8lYua62wML2cFWqjfUX-EhfxysR0JrdDabRpRm2a-kisld8QcNXqwL9bTTWc5JDfrn0g35Tl84xYsue-C2sqF3UjM7P_otGNymCMEKLS1btw5xNRHsuDwV8VNYuj2CElrvRtiDVHeFQDLAcyOGJH_2ZLtsbNQFId2vAUBtBhwDh3onWUuWshUmcsDhFKyVr2mpbVaAeuKwr9PUaI4A',
-    icon: <Globe className="w-12 h-12" />
-  }
-];
+interface Project {
+  id: number;
+  category: string;
+  title: string;
+  desc: string;
+  fullDesc: string;
+  challenge: string;
+  solution: string;
+  results: string[];
+  img: string | null;
+  icon: string;
+}
+
+const iconMap: Record<string, React.ReactNode> = {
+  LayoutGrid: <LayoutGrid className="w-12 h-12" />,
+  Globe: <Globe className="w-12 h-12" />,
+  Settings2: <Settings2 className="w-12 h-12" />,
+  ShoppingBag: <ShoppingBag className="w-12 h-12" />
+};
 
 export default function ProjectDetail() {
   const { id } = useParams();
-  const project = projects.find(p => p.id === Number(id));
+  const [project, setProject] = useState<Project | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProject = async () => {
+      try {
+        const response = await fetch('../data/projects.json');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        const found = data.find((p: any) => p.id === Number(id));
+        setProject(found || null);
+      } catch (err) {
+        console.error('Erro ao carregar projeto:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProject();
+  }, [id]);
+
+  if (loading) {
+    return <div className="pt-40 pb-20 text-center text-on-surface-variant">Carregando detalhes do projeto...</div>;
+  }
 
   const projectSchema = project ? {
     "@context": "https://schema.org",
@@ -82,7 +98,7 @@ export default function ProjectDetail() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <span className={`text-xs font-black uppercase tracking-widest mb-4 inline-block ${project.category === 'Power Platform' ? 'text-primary' : 'text-tertiary'}`}>
+            <span className={`inline-block px-4 py-1 mb-6 border rounded-full text-xs font-bold uppercase tracking-widest ${project.category === 'Power Platform' ? 'border-primary/20 bg-primary/5 text-primary' : 'border-tertiary/20 bg-tertiary/5 text-tertiary'}`}>
               {project.category}
             </span>
             <h1 className="text-4xl md:text-6xl font-bold text-on-surface mb-8 leading-tight">
@@ -124,7 +140,7 @@ export default function ProjectDetail() {
               {project.img ? (
                 <img src={project.img} alt={project.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               ) : (
-                <div className="text-outline/30">{project.icon}</div>
+                <div className="text-outline/30">{iconMap[project.icon] || <LayoutGrid className="w-12 h-12" />}</div>
               )}
             </div>
             <div className="mt-8 p-8 glass-panel rounded-2xl border border-white/5">
@@ -132,7 +148,7 @@ export default function ProjectDetail() {
               <div className="flex flex-wrap gap-2">
                 {project.category === 'Power Platform' ? 
                   ['Power Apps', 'Power Automate', 'Dataverse', 'Power BI'].map(t => <span key={t} className="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">{t}</span>) :
-                  ['WordPress', 'React', 'Tailwind CSS', 'Headless CMS'].map(t => <span key={t} className="px-3 py-1 bg-tertiary/10 text-tertiary text-xs font-bold rounded-full">{t}</span>)
+                  ['WordPress', 'Elementor', 'CSS', 'JavaScript'].map(t => <span key={t} className="px-3 py-1 bg-tertiary/10 text-tertiary text-xs font-bold rounded-full">{t}</span>)
                 }
               </div>
             </div>

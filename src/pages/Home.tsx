@@ -1,9 +1,49 @@
-import { motion } from 'motion/react';
-import { Star, Verified, LayoutGrid, Globe as GlobeIcon, CheckCircle2, ArrowRight, Quote, Calendar, Clock } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Star, Verified, LayoutGrid, Globe as GlobeIcon, CheckCircle2, ArrowRight, Quote, Calendar, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
 export default function Home() {
+  const [currentClientIndex, setCurrentClientIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [posts, setPosts] = useState<any[]>([]);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    // Fetch blog posts for preview
+    fetch('data/posts.json')
+      .then(res => res.json())
+      .then(data => setPosts(data.slice(0, 2)))
+      .catch(err => console.error('Erro ao carregar preview do blog:', err));
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const clients = [
+    'Saboremio Refeições Coletivas', 
+    'NDC', 
+    'Idea Remota', 
+    'PetDream', 
+    'Switches Express', 
+    'Enprodes', 
+    'Lançamentos Rio de Janeiro', 
+    'Instituto Conecte'
+  ];
+
+  const nextClient = () => {
+    setCurrentClientIndex((prev) => (prev + 1) % clients.length);
+  };
+
+  const prevClient = () => {
+    setCurrentClientIndex((prev) => (prev - 1 + clients.length) % clients.length);
+  };
+
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -49,7 +89,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="lg:col-span-8"
           >
-            <span className="inline-block py-1 px-3 mt-8 mb-6 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-widest uppercase">
+            <span className="inline-block px-4 py-1 mb-6 border border-primary/20 bg-primary/5 rounded-full text-primary text-xs font-bold tracking-widest uppercase">
               Líderes em Inovação
             </span>
             <h1 className="text-display-lg text-on-surface mb-8">
@@ -59,12 +99,18 @@ export default function Home() {
               Não apenas desenvolvemos software. Entregamos vantagem competitiva através de automação Microsoft e ecossistemas web ultra-rápidos que convertem.
             </p>
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+              >
                 <Link to="/contato" className="inline-block px-8 py-4 bg-primary text-background font-bold rounded transition-all shadow-xl shadow-primary/20">
                   Inicie sua Jornada
                 </Link>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+              >
                 <Link to="/portfolio" className="inline-block px-8 py-4 border border-outline-variant text-on-surface font-bold rounded backdrop-blur-md hover:bg-white/5 transition-all">
                   Ver Soluções
                 </Link>
@@ -128,16 +174,69 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Client Logos Section */}
-      <section className="py-20 bg-background/50 border-y border-white/5">
+      {/* Client Logos Section - Manual Carousel */}
+      <section className="py-24 bg-background/50 border-y border-white/5 overflow-hidden">
         <div className="max-w-7xl mx-auto px-8">
-          <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-outline mb-12">Empresas que confiam na nossa tecnologia</p>
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-            {['Microsoft', 'Logitech', 'Venture Hub', 'Global Tech', 'Inova SP'].map((client) => (
-              <div key={client} className="text-2xl font-black text-on-surface-variant hover:text-primary transition-colors cursor-default">
-                {client}
-              </div>
-            ))}
+          <div className="flex flex-col md:flex-row items-center justify-between mb-16 gap-8">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-primary mb-2">Nossos Clientes</p>
+              <h2 className="text-3xl md:text-4xl font-black text-white tracking-tighter">Empresas que confiam na nossa tecnologia</h2>
+            </div>
+            <div className="flex gap-4">
+              <button 
+                onClick={prevClient}
+                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:border-primary transition-all group"
+                aria-label="Cliente anterior"
+              >
+                <ChevronLeft className="w-6 h-6 group-active:scale-90 transition-transform" />
+              </button>
+              <button 
+                onClick={nextClient}
+                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:border-primary transition-all group"
+                aria-label="Próximo cliente"
+              >
+                <ChevronRight className="w-6 h-6 group-active:scale-90 transition-transform" />
+              </button>
+            </div>
+          </div>
+          
+          <div className="relative h-48 md:h-64 flex items-center justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+              <AnimatePresence mode="popLayout">
+                {[0, 1, 2].map((offset) => {
+                  const index = (currentClientIndex + offset) % clients.length;
+                  // Hide extra items on smaller screens
+                  if (isMobile && offset > 0) return null;
+                  if (window.innerWidth < 1024 && offset > 1) return null;
+
+                  return (
+                    <motion.div 
+                      key={`${clients[index]}-${index}`}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.4 }}
+                      className="text-center px-4 flex items-center justify-center h-full group"
+                    >
+                      <span className="text-xl md:text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/50 tracking-tighter leading-tight block group-hover:text-primary transition-all duration-300 cursor-default">
+                        {clients[index]}
+                      </span>
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
+            </div>
+            
+            {/* Indicators */}
+            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+              {clients.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentClientIndex(i)}
+                  className={`h-1 transition-all duration-300 rounded-full ${i === currentClientIndex ? 'w-8 bg-primary' : 'w-2 bg-white/10'}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -314,22 +413,7 @@ export default function Home() {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              {
-                id: 1,
-                title: 'Por que a Power Platform é o futuro da automação corporativa?',
-                excerpt: 'Descubra como empresas de todos os tamanhos estão economizando milhares de horas com aplicativos internos.',
-                date: '15 Mar 2026',
-                category: 'Tecnologia'
-              },
-              {
-                id: 2,
-                title: 'WordPress vs. Outras Plataformas: O que realmente importa?',
-                excerpt: 'Analisamos os Core Web Vitals e como o WordPress de alta performance pode ser a chave para o seu ranking.',
-                date: '10 Mar 2026',
-                category: 'Design & Web'
-              }
-            ].map((post, i) => (
+            {posts.map((post, i) => (
               <motion.article 
                 key={i}
                 initial={{ opacity: 0, y: 20 }}

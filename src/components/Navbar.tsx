@@ -59,10 +59,10 @@ export default function Navbar() {
             </Link>
           ))}
           <div className="flex items-center gap-4 ml-4">
-            <a href="https://instagram.com/retaketec" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">
+            <a href="https://instagram.com/retaketecnologia" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">
               <Instagram className="w-5 h-5" />
             </a>
-            <a href="https://linkedin.com/company/retaketec" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">
+            <a href="https://linkedin.com/company/retake-tecnologia" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">
               <Linkedin className="w-5 h-5" />
             </a>
           </div>

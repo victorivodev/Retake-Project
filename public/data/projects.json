@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "category": "WordPress",
+    "title": "Landing Page NDC – Cisco Connect 2026",
+    "desc": "Landing page estratégica para captação de leads durante o evento Cisco Connect 2026.",
+    "fullDesc": "Projeto desenvolvido para a NDC com foco em conversão durante o Cisco Connect 2026. A landing page foi pensada para capturar leads qualificados em tempo real durante o evento.",
+    "challenge": "Necessidade de alta performance, carregamento rápido em ambiente de evento e integração com ferramentas de marketing.",
+    "solution": "Desenvolvimento de landing page otimizada com Elementor, integração com formulários e automações de captura de leads.",
+    "results": ["Alta taxa de conversão durante o evento", "Carregamento otimizado em redes instáveis", "Integração direta com CRM"],
+    "img": "",
+    "icon": "Globe"
+  },
+  {
+    "id": 2,
+    "category": "WordPress",
+    "title": "Landing Page Enprodes – CBT",
+    "desc": "Landing page institucional para o Congresso Brasileiro de Túneis.",
+    "fullDesc": "Desenvolvida para a Enprodes com objetivo de apresentar soluções técnicas e captar contatos estratégicos durante o evento.",
+    "challenge": "Comunicar soluções técnicas complexas de forma clara e atrativa.",
+    "solution": "Design moderno com foco em leitura rápida, estruturação de conteúdo técnico e CTAs estratégicos.",
+    "results": ["Melhor engajamento no evento", "Captação de leads qualificados", "Clareza na apresentação dos serviços"],
+    "img": "",
+    "icon": "Globe"
+  },
+  {
+    "id": 3,
+    "category": "WordPress",
+    "title": "Site Institucional PetDream",
+    "desc": "Portal institucional para rede de hospitais veterinários e petcare.",
+    "fullDesc": "Criação de presença digital completa para a PetDream, transmitindo confiança, cuidado e profissionalismo.",
+    "challenge": "Unificar comunicação de múltiplas unidades e serviços.",
+    "solution": "Site institucional com foco em UX, navegação simples e apresentação clara dos serviços.",
+    "results": ["Aumento na captação de clientes", "Melhor posicionamento digital", "Comunicação padronizada"],
+    "img": "",
+    "icon": "Globe"
+  },
+  {
+    "id": 4,
+    "category": "WordPress",
+    "title": "Restilização Site IdeaRemota",
+    "desc": "Modernização visual e estrutural de site institucional.",
+    "fullDesc": "Projeto de redesign completo focado em performance, identidade visual e experiência do usuário.",
+    "challenge": "Site desatualizado e baixa performance.",
+    "solution": "Nova interface, otimização de carregamento e melhoria na arquitetura de informação.",
+    "results": ["Melhora significativa na performance", "Design atualizado", "Maior retenção de usuários"],
+    "img": "",
+    "icon": "Globe"
+  },
+  {
+    "id": 5,
+    "category": "WordPress",
+    "title": "Site Institucional Switches Express",
+    "desc": "Criação de site institucional com foco em posicionamento e vendas.",
+    "fullDesc": "Desenvolvimento completo do site institucional da Switches Express com foco em conversão e apresentação de produtos.",
+    "challenge": "Construir autoridade digital em mercado competitivo.",
+    "solution": "Estrutura orientada a conversão com SEO e performance.",
+    "results": ["Melhor posicionamento online", "Aumento de leads", "Maior credibilidade da marca"],
+    "img": "",
+    "icon": "Globe"
+  },
+  {
+    "id": 6,
+    "category": "WordPress",
+    "title": "Portal Imobiliário Alto Padrão – RJ",
+    "desc": "Plataforma para divulgação de empreendimentos de alto padrão.",
+    "fullDesc": "Desenvolvimento de site estilo imobiliária focado em imóveis de luxo no Rio de Janeiro.",
+    "challenge": "Transmitir sofisticação e exclusividade.",
+    "solution": "Design premium, navegação fluida e destaque para imagens de alto impacto.",
+    "results": ["Aumento na geração de leads qualificados", "Melhor experiência do usuário", "Posicionamento premium"],
+    "img": "",
+    "icon": "Globe"
+  },
+  {
+    "id": 7,
+    "category": "Power Platform",
+    "title": "Intranet Saboremio",
+    "desc": "Intranet corporativa completa construída em SharePoint.",
+    "fullDesc": "Centralização de comunicação interna, documentos e processos da empresa Saboremio.",
+    "challenge": "Informações descentralizadas e baixa organização interna.",
+    "solution": "Estruturação completa no SharePoint com páginas, listas e automações.",
+    "results": ["Centralização da informação", "Melhoria na comunicação interna", "Aumento de produtividade"],
+    "img": "",
+    "icon": "LayoutGrid"
+  },
+  {
+    "id": 8,
+    "category": "Power Platform",
+    "title": "Sistema SIGA",
+    "desc": "Sistema de gestão de atividades, entregáveis e planos de trabalho.",
+    "fullDesc": "Plataforma desenvolvida para gerenciar tarefas, entregáveis e planos de trabalho com indicadores inteligentes e automação de processos.",
+    "challenge": "Falta de controle e visibilidade sobre execução de atividades.",
+    "solution": "Aplicação completa com Power Apps, Power Automate e SharePoint.",
+    "results": ["Controle total das atividades", "Indicadores automatizados", "Padronização de processos"],
+    "img": "",
+    "icon": "LayoutGrid"
+  },
+  {
+    "id": 9,
+    "category": "Power Platform",
+    "title": "App de Gestão de Acessos",
+    "desc": "Sistema centralizado para controle de acessos a aplicações corporativas.",
+    "fullDesc": "Aplicação criada para gerenciar solicitações e aprovações de acesso aos sistemas internos da empresa.",
+    "challenge": "Controle manual e descentralizado de acessos.",
+    "solution": "App com fluxo de aprovação, controle de permissões e rastreabilidade.",
+    "results": ["Maior segurança", "Controle centralizado", "Auditoria completa"],
+    "img": "",
+    "icon": "LayoutGrid"
+  },
+  {
+    "id": 10,
+    "category": "Power Platform",
+    "title": "App de Chamados",
+    "desc": "Sistema interno para abertura e gestão de chamados.",
+    "fullDesc": "Aplicação desenvolvida para gerenciar solicitações internas com fluxo estruturado de atendimento.",
+    "challenge": "Falta de organização no atendimento de demandas internas.",
+    "solution": "App com categorização de chamados, status e acompanhamento.",
+    "results": ["Melhor organização", "Redução de tempo de resposta", "Visibilidade das demandas"],
+    "img": "",
+    "icon": "LayoutGrid"
+  }
+]
