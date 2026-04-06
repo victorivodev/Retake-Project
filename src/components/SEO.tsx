@@ -19,7 +19,7 @@ export default function SEO({
   twitterHandle = '@retaketec',
   schema
 }: SEOProps) {
-  const siteTitle = `${title} | Retake | Tecnologia & Design`;
+  const siteTitle = `${title} | Retake Tecnologia & Design`;
   const fullUrl = canonical ? `https://ais-pre-lxf34zc4gd2r3ldgl2zwbx-199811131034.us-east1.run.app${canonical}` : 'https://ais-pre-lxf34zc4gd2r3ldgl2zwbx-199811131034.us-east1.run.app';
 
   return (

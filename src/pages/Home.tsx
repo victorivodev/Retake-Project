@@ -47,7 +47,7 @@ export default function Home() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Retake | Tecnologia & Design",
+    "name": "Retake Tecnologia & Design",
     "url": "https://ais-pre-lxf34zc4gd2r3ldgl2zwbx-199811131034.us-east1.run.app",
     "logo": "https://ais-pre-lxf34zc4gd2r3ldgl2zwbx-199811131034.us-east1.run.app/logo.png",
     "description": "Especialistas em Power Platform e WordPress de Alta Performance.",
